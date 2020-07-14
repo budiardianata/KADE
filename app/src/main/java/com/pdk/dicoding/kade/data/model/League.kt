@@ -1,4 +1,4 @@
-package com.pdk.dicoding.kade.model
+package com.pdk.dicoding.kade.data.model
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
@@ -8,7 +8,8 @@ import kotlinx.android.parcel.Parcelize
  * Email: budiardianata@windowslive.com
  */
 @Parcelize
-class League (val id: Int?,
-              val name: String?,
-              val description: String?,
-              val image: Int):Parcelable
+class League(
+    val id: Int,
+    val name: String,
+    val image: String
+) : Parcelable
