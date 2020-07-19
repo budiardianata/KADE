@@ -1,36 +1,36 @@
 package com.pdk.dicoding.kade.ui.fragments
 
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.palette.graphics.Palette
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.tabs.TabLayoutMediator
+import com.pdk.dicoding.kade.R
 import com.pdk.dicoding.kade.databinding.FragmentLeagueDetailBinding
+import com.pdk.dicoding.kade.utils.Utils
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LeagueDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LeagueDetailFragment : Fragment() {
     private lateinit var binding: FragmentLeagueDetailBinding
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private val args: LeagueDetailFragmentArgs by navArgs()
+    private lateinit var pagerAdapter: PagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        sharedElementEnterTransition = Utils.materialContainerTransform(requireActivity())
+        sharedElementReturnTransition = Utils.materialContainerTransform(requireActivity())
     }
 
     override fun onCreateView(
@@ -44,6 +44,42 @@ class LeagueDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
+        binding.appbar.background
+        binding.coordinator.transitionName = args.league.id
+        binding.data = args.league
+        Glide.with(requireContext())
+            .asBitmap()
+            .load(args.league.badge)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    val palette = Palette.from(resource).generate()
+                    palette.darkVibrantSwatch?.let {
+                        binding.collapsingToolbar.setBackgroundColor(it.rgb)
+                        binding.toolbar.setBackgroundColor(it.rgb)
+                        binding.collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE)
+                        binding.collapsingToolbar.setExpandedTitleColor(Color.WHITE)
+                    } ?: palette.lightVibrantSwatch?.let {
+                        binding.toolbar.setBackgroundColor(it.rgb)
+                        binding.collapsingToolbar.setBackgroundColor(it.rgb)
+                    }
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {}
+            })
+
+        initTab()
+
+        binding.fab.setOnClickListener {
+            findNavController().navigate(
+                LeagueDetailFragmentDirections.leagueDetailToLeagueDialog(
+                    args.league
+                )
+            )
+
+        }
     }
 
     private fun initToolbar() {
@@ -54,13 +90,27 @@ class LeagueDetailFragment : Fragment() {
         )
     }
 
-    companion object {
-        fun newInstance(param1: String, param2: String) =
-            LeagueDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun initTab() {
+        val tabList = arrayOf(
+            resources.getString(R.string.previous_match),
+            resources.getString(R.string.next_match)
+        )
+        pagerAdapter = PagerAdapter(tabList, args.league.id, this)
+        binding.pager.adapter = pagerAdapter
+        TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
+            tab.text = tabList[position]
+        }.attach()
+    }
+
+    inner class PagerAdapter(
+        private val tabList: Array<String>,
+        private val username: String,
+        fragment: Fragment
+    ) : FragmentStateAdapter(fragment) {
+
+        override fun getItemCount(): Int = tabList.size
+
+        override fun createFragment(position: Int): Fragment =
+            EventListFragment.newInstance(username, tabList[position])
     }
 }

@@ -10,17 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        app:elevation="0dp"
-        style="@style/Widget.MaterialComponents.AppBarLayout.Surface">
+        style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_scrollFlags="scroll|enterAlways|snap"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="?attr/actionBarSize" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment
+
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -30,4 +31,30 @@
         android:layout_alignParentTop="true"
         app:defaultNavHost="true"
         app:navGraph="@navigation/my_navigation" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        app:layout_behavior="com.google.android.material.bottomappbar.BottomAppBar$Behavior"
+        style="@style/Widget.MaterialComponents.BottomAppBar"
+        android:id="@+id/bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:hideOnScroll="true"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:fabCradleMargin="@dimen/spacing_medium"
+        app:contentInsetStart="0dp"
+        app:fabCradleRoundedCornerRadius="@dimen/spacing_small"
+        app:fabAlignmentMode="center">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            app:menu="@menu/bottom_menu"
+            app:layout_behavior="com.google.android.material.bottomappbar.BottomAppBar$Behavior" />
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

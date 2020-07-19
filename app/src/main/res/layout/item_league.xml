@@ -31,9 +31,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:avatar="@{data.image}"
+                app:error="@{@drawable/ic_ball}"
+                app:imageUrl="@{data.badge}"
                 tools:srcCompat="@tools:sample/avatars"
-                android:contentDescription="@{data.name}" />
+                android:contentDescription="@{data.leagueName}" />
 
             <TextView
                 android:id="@+id/leagueName"
@@ -41,7 +42,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:text="@{data.name}"
+                android:text="@{data.leagueName}"
                 tools:text="@tools:sample/full_names"
                 app:layout_constraintTop_toBottomOf="@+id/leagueLogo"
                 android:layout_marginTop="@dimen/spacing_middle"

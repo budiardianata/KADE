@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +20,8 @@ import com.pdk.dicoding.kade.databinding.ItemLeagueBinding
  * Email: budiardianata@windowslive.com
  */
 class LeagueAdapter(
-    private val leagues: List<League>,
-    private val clickListener: (League) -> Unit
+    private val leagues: ArrayList<League>,
+    private val clickListener: (League, View) -> Unit
 ) : RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>() {
 
 
@@ -39,14 +40,21 @@ class LeagueAdapter(
     override fun onBindViewHolder(holder: LeagueViewHolder, position: Int) =
         holder.bind(leagues[position], clickListener)
 
+    fun setData(items: List<League>) {
+        leagues.apply {
+            clear()
+            addAll(items)
+        }
+        notifyDataSetChanged()
+    }
 
     inner class LeagueViewHolder(private val binding: ItemLeagueBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(league: League, click: (League) -> Unit) {
+        fun bind(league: League, click: (League, View) -> Unit) {
             binding.data = league
             Glide.with(binding.root)
                 .asBitmap()
-                .load(league.image)
+                .load(league.badge)
                 .into(object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(
                         resource: Bitmap,
@@ -63,7 +71,8 @@ class LeagueAdapter(
 
                     override fun onLoadCleared(placeholder: Drawable?) {}
                 })
-            binding.root.setOnClickListener { click(league) }
+            binding.rootCard.transitionName = league.id
+            binding.root.setOnClickListener { click(league, binding.rootCard) }
         }
     }
 }
