@@ -3,6 +3,10 @@
     <string name="not_found">Data Tidak Ditemukan</string>
     <string name="not_valid">%s tidak tersedia</string>
     <string name="settings">Pengaturan</string>
+    <string name="favorite">Favorit</string>
+    <string name="favorite_add">Ditambahkan ke Favorit</string>
+    <string name="favorite_remove">Dihapus dari Favorit</string>
+    <string name="favorite_failed">Favorit Gagal</string>
     <string name="search">Pencarian</string>
     <string name="search_match_hint">Cari Jadwal Pertandingan</string>
     <string name="search_country_hint">Filter Liga Berdasar Negara</string>

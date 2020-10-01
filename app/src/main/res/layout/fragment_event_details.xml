@@ -7,6 +7,10 @@
     <data>
 
         <variable
+            name="model"
+            type="com.pdk.dicoding.kade.ui.viewmodels.EventDetailViewModel" />
+
+        <variable
             name="data"
             type="com.pdk.dicoding.kade.data.model.Event" />
     </data>
@@ -463,5 +467,14 @@
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:contentDescription="@string/app_name"
+            android:src='@{model.isFavorite ? @drawable/ic_favorite : @drawable/ic_favorite_off}'
+            android:onClick="@{()->model.updateFavorite(data)}" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

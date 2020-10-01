@@ -101,7 +101,8 @@ class EventFragment : Fragment() {
         val searchManager = context?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.searchView).actionView as SearchView
         searchView.apply {
-            isIconified = false
+            requestFocus()
+            setIconifiedByDefault(false)
             setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
             queryHint = resources.getString(R.string.search_match_hint)
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -115,6 +116,7 @@ class EventFragment : Fragment() {
                     return false
                 }
             })
+            setIconifiedByDefault(false)
         }
         viewModel.query.observe(viewLifecycleOwner, {
             searchView.setQuery(it, false)

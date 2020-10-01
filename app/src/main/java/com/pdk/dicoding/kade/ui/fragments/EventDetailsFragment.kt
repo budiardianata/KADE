@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class EventDetailsFragment : Fragment() {
         sharedElementReturnTransition = Utils.materialContainerTransform(requireActivity())
         viewModel = ViewModelProvider(this).get(EventDetailViewModel::class.java)
         viewModel.getBadges(args.event.idHome, args.event.awayId)
+        viewModel.getIsFavorite(args.event.id)
     }
 
     override fun onCreateView(
@@ -40,18 +42,29 @@ class EventDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolbar()
-        binding.coordinator.transitionName = args.event.id
-        binding.mainLayout.visibility = View.GONE
-        viewModel.listBadge.observe(viewLifecycleOwner, { badge ->
-            args.event.homeBadge = badge[0]
-            args.event.awayBadge = badge[1]
-            binding.apply {
-                data = args.event
-                mainLayout.visibility = View.VISIBLE
-                progress.visibility = View.GONE
-            }
-        })
+        binding.apply {
+            lifecycleOwner = viewLifecycleOwner
+            model = viewModel
+            coordinator.transitionName = args.event.id
+            mainLayout.visibility = View.GONE
+        }
 
+        viewModel.apply {
+            listBadge.observe(viewLifecycleOwner, { badge ->
+                args.event.homeBadge = badge[0]
+                args.event.awayBadge = badge[1]
+                binding.apply {
+                    data = args.event
+                    mainLayout.visibility = View.VISIBLE
+                    progress.visibility = View.GONE
+                }
+            })
+            favMessage.observe(viewLifecycleOwner, {
+                it.getContent()?.let { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     }
 
     private fun initToolbar() {

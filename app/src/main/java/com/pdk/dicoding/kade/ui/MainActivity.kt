@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
             PreferenceManager.getDefaultSharedPreferences(this)
                 .getString(resources.getString(R.string.theme_key), "")
         )
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHostFragment.navController
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.eventFragment, R.id.leagueFragment
+                R.id.eventFragment, R.id.leagueFragment, R.id.favoriteFragment
             )
         )
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -63,6 +62,10 @@ class MainActivity : AppCompatActivity() {
                         bottomAppBar.visibility = View.VISIBLE
                     }
                     R.id.eventFragment -> {
+                        appbarLayout.setExpanded(true, true)
+                        bottomAppBar.visibility = View.VISIBLE
+                    }
+                    R.id.favoriteFragment -> {
                         appbarLayout.setExpanded(true, true)
                         bottomAppBar.visibility = View.VISIBLE
                     }

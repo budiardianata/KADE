@@ -77,5 +77,14 @@
         android:id="@+id/aboutFragment"
         android:name="com.pdk.dicoding.kade.ui.fragments.AboutFragment"
         android:label="@string/about" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.pdk.dicoding.kade.ui.fragments.FavoriteFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite">
+        <action
+            android:id="@+id/favoriteToEventDetails"
+            app:destination="@id/eventDetailsFragment" />
+    </fragment>
 
 </navigation>

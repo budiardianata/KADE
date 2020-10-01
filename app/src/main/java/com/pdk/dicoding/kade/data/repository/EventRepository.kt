@@ -3,8 +3,12 @@ package com.pdk.dicoding.kade.data.repository
 import android.app.Application
 import androidx.lifecycle.liveData
 import com.pdk.dicoding.kade.data.api.ApiService
+import com.pdk.dicoding.kade.data.local.FootballDatabase
+import com.pdk.dicoding.kade.data.model.Event
 import com.pdk.dicoding.kade.utils.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.conflate
+import kotlinx.coroutines.flow.flowOn
 
 
 /**
@@ -15,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 
 class EventRepository(application: Application) {
     private val apiService = ApiService(application)
+    private val footballDao = FootballDatabase.getDatabase(application).footballDao()
     private val strSoccer = "Soccer"
 
     fun searchEvent(query: String) = liveData(Dispatchers.IO) {
@@ -46,4 +51,12 @@ class EventRepository(application: Application) {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
+
+    fun getEventFavorite() = footballDao.getEventFavoriteList().flowOn(Dispatchers.IO).conflate()
+
+    fun checkIsFav(id: String) = footballDao.checkIsFavEvent(id).flowOn(Dispatchers.IO).conflate()
+
+    suspend fun addFavorite(event: Event) = footballDao.insertEvent(event)
+
+    suspend fun deleteFavorite(event: Event) = footballDao.deleteEvent(event)
 }
