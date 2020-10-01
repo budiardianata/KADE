@@ -19,9 +19,9 @@
 ## [Submission 3: Football Match Schedule Application with Database](https://github.com/budiardianata/kade/tree/submission3)
 
 ### To do List
-- [x] Football Match Schedule
-- [x] Match Detail
-- [x] Search Match Schedule
+- [x] Add Football Match Favorite
+- [x] Remove Football Match Favorite
+- [x] List Football Match Favorite
 
 ### Library Used
 - [ViewModels](https://developer.android.com/topic/libraries/architecture/viewmodel)

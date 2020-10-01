@@ -26,9 +26,6 @@ class EventDetailsFragment : Fragment() {
         super.onCreate(savedInstanceState)
         sharedElementEnterTransition = Utils.materialContainerTransform(requireActivity())
         sharedElementReturnTransition = Utils.materialContainerTransform(requireActivity())
-        viewModel = ViewModelProvider(this).get(EventDetailViewModel::class.java)
-        viewModel.getBadges(args.event.idHome, args.event.awayId)
-        viewModel.getIsFavorite(args.event.id)
     }
 
     override fun onCreateView(
@@ -36,6 +33,9 @@ class EventDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentEventDetailsBinding.inflate(layoutInflater, container, false)
+        viewModel = ViewModelProvider(this).get(EventDetailViewModel::class.java)
+        viewModel.getBadges(args.event.idHome, args.event.awayId)
+        viewModel.getIsFavorite(args.event.id)
         return binding.root
     }
 
@@ -44,6 +44,7 @@ class EventDetailsFragment : Fragment() {
         initToolbar()
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
+            data = args.event
             model = viewModel
             coordinator.transitionName = args.event.id
             mainLayout.visibility = View.GONE

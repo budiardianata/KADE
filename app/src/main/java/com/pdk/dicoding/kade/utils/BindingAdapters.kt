@@ -67,30 +67,33 @@ fun bindTextArray(textView: TextView, text: String) {
 
 @BindingAdapter(value = ["imageUrl", "error", "overrideSize"], requireAll = false)
 fun loadImage(imageView: ImageView, url: String?, error: Drawable, isOrigin: Boolean) {
-    val circularProgressDrawable = CircularProgressDrawable(imageView.context)
-
-    circularProgressDrawable.apply {
-        setColorSchemeColors(R.color.colorPrimary)
-        strokeWidth = 5f
-        centerRadius = 30f
-        start()
+    if (url != null) {
+        val circularProgressDrawable = CircularProgressDrawable(imageView.context)
+        circularProgressDrawable.apply {
+            setColorSchemeColors(R.color.colorPrimary)
+            strokeWidth = 5f
+            centerRadius = 30f
+            start()
+        }
+        val requestOptions = if (isOrigin)
+            RequestOptions
+                .centerCropTransform()
+                .override(100, 100)
+        else RequestOptions.centerCropTransform()
+        Glide.with(imageView)
+            .asBitmap()
+            .load("$url/preview")
+            .placeholder(circularProgressDrawable)
+            .apply(
+                requestOptions
+            )
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .error(error)
+            .into(imageView)
+    } else {
+        imageView.setImageDrawable(error)
     }
 
-    val requestOptions = if (isOrigin)
-        RequestOptions
-            .centerCropTransform()
-            .override(100, 100)
-    else RequestOptions.centerCropTransform()
-    Glide.with(imageView)
-        .asBitmap()
-        .load("$url/preview")
-        .placeholder(circularProgressDrawable)
-        .apply(
-            requestOptions
-        )
-        .diskCacheStrategy(DiskCacheStrategy.ALL)
-        .error(error)
-        .into(imageView)
 }
 
 @BindingAdapter("goToUrl")

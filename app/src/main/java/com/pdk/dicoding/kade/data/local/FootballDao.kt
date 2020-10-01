@@ -15,7 +15,7 @@ interface FootballDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertEvent(event: Event): Long
 
-    @Query("SELECT * from events_table ORDER BY id ASC")
+    @Query("SELECT * from events_table ORDER BY id DESC")
     fun getEventFavoriteList(): Flow<List<Event>>
 
     @Query("SELECT EXISTS(SELECT 1 FROM events_table WHERE id = :id)")
