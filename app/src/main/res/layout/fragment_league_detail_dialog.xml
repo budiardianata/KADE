@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragments.LeagueDetailDialogFragment">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="data"
+            type="com.pdk.dicoding.kade.data.model.League" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/sweep_indicator"
+                android:layout_width="50dp"
+                android:layout_margin="@dimen/spacing_middle"
+                android:layout_height="@dimen/spacing_medium"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_swipe_up"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/league_title" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/badge"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="@dimen/spacing_middle"
+                app:error="@{@drawable/ic_ball}"
+                app:imageUrl="@{data.badge}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/sweep_indicator"
+                tools:src="@tools:sample/avatars" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/league_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@{data.leagueName}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/badge"
+                app:layout_constraintTop_toBottomOf="@+id/sweep_indicator"
+                tools:text="@tools:sample/full_names" />
+
+            <TextView
+                android:id="@+id/country"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="@dimen/spacing_medium"
+                android:gravity="center_vertical"
+                android:text="@{data.country}"
+                app:layout_constraintStart_toEndOf="@+id/badge"
+                app:layout_constraintTop_toBottomOf="@+id/league_title"
+                tools:text="@tools:sample/cities" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:drawableStart="@drawable/ic_gender"
+                android:drawablePadding="@dimen/spacing_medium"
+                android:gravity="center_vertical"
+                android:text="@{data.gender}"
+                app:layout_constraintStart_toEndOf="@+id/country"
+                app:layout_constraintTop_toBottomOf="@+id/league_title"
+                tools:text="@tools:sample/us_zipcodes" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:src="@drawable/ic_web"
+                app:goToUrl="@{data.website}"
+                android:visibility='@{(data.website==null||data.website.equals(""))? View.GONE : View.VISIBLE}'
+                app:layout_constraintStart_toEndOf="@+id/badge"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/rss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:src="@drawable/ic_rss"
+                app:goToUrl="@{data.rss}"
+                android:visibility='@{(data.rss==null||data.rss.equals(""))? View.GONE : View.VISIBLE}'
+                app:layout_constraintStart_toEndOf="@+id/web"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/youtube"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:src="@drawable/ic_youtube"
+                app:goToUrl="@{data.youtube}"
+                android:visibility='@{(data.youtube==null||data.youtube.equals(""))? View.GONE : View.VISIBLE}'
+                app:layout_constraintStart_toEndOf="@+id/rss"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/facebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:src="@drawable/ic_facebook"
+                app:goToUrl="@{data.facebook}"
+                android:visibility='@{(data.facebook==null||data.facebook.equals(""))? View.GONE : View.VISIBLE}'
+                app:layout_constraintStart_toEndOf="@+id/youtube"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/twitter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:src="@drawable/ic_twitter"
+                app:goToUrl="@{data.twitter}"
+                android:visibility='@{(data.twitter==null||data.twitter.equals(""))? View.GONE : View.VISIBLE}'
+                app:layout_constraintStart_toEndOf="@+id/facebook"
+                app:layout_constraintTop_toBottomOf="@+id/country" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                overrideSize="true"
+                android:padding="@dimen/spacing_large"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:maxHeight="100dp"
+                android:scaleType="fitXY"
+                android:visibility="@{data.banner!=null? View.VISIBLE : View.GONE}"
+                app:error="@{@drawable/ic_launcher_background}"
+                app:imageUrl="@{data.banner}"
+                app:layout_constraintTop_toBottomOf="@+id/badge"
+                tools:src="@tools:sample/backgrounds/scenic" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_middle"
+                android:text="@{data.description}"
+                tools:text="@tools:sample/lorem/random" />
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</layout>

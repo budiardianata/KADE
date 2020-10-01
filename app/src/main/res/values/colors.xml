@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#D32F2F</color>
+    <color name="colorPrimaryVariant">#9A0007</color>
+    <color name="colorOnPrimary">@android:color/white</color>
+    <color name="colorSecondary">#FFCC80</color>
+    <color name="colorOnSecondary">@android:color/black</color>
+    <color name="colorSecondaryVariant">#FFFFB0</color>
+    <color name="colorStatusBar">#9A0007</color>
 </resources>

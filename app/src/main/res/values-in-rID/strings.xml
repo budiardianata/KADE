@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="not_found">Data Tidak Ditemukan</string>
+    <string name="not_valid">%s tidak tersedia</string>
+    <string name="settings">Pengaturan</string>
+    <string name="search">Pencarian</string>
+    <string name="search_match_hint">Cari Jadwal Pertandingan</string>
+    <string name="search_country_hint">Filter Liga Berdasar Negara</string>
+    <string name="next_match">Pentandingan Selanjutnya</string>
+    <string name="previous_match">Pertantingan Sebelumnya</string>
+    <string name="language">Bahasa</string>
+    <string name="language_summary">Ganti Bahasa</string>
+    <string name="theme">Tema Aplikasi</string>
+    <string name="about">Tentang Saya</string>
+    <string name="league">Liga</string>
+    <string name="match">Pertandingan</string>
+    <string name="theme_Select">Pilih Tema</string>
+    <string-array name="themeListArray">
+        <item>Tema Terang</item>
+        <item>Tema Gelap</item>
+        <item>Diatur Sistem</item>
+    </string-array>
+    <string name="player_details">Detail Pemain</string>
+    <string name="goal_keeper">Penjaga Gawang</string>
+    <string name="defender">Pertahanan</string>
+    <string name="forwarder">Penyerang</string>
+    <string name="match_details">Detail Pertandingan</string>
+    <string name="goal_detail">Detail Goal</string>
+    <string name="substitution">Cadangan</string>
+    <string name="midfielder">Gelandang</string>
+</resources>

@@ -1,52 +1,83 @@
 package com.pdk.dicoding.kade.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.preference.PreferenceManager
 import com.pdk.dicoding.kade.R
-import com.pdk.dicoding.kade.model.League
-import com.pdk.dicoding.kade.ui.adapter.LeagueAdapter
-import org.jetbrains.anko.*
-import org.jetbrains.anko.constraint.layout.constraintLayout
-import org.jetbrains.anko.recyclerview.v7.recyclerView
+import com.pdk.dicoding.kade.databinding.ActivityMainBinding
+import com.pdk.dicoding.kade.utils.Utils
 
 class MainActivity : AppCompatActivity() {
-    lateinit var recyclerView: RecyclerView
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MainActivityUI().setContentView(this)
-        recyclerView.adapter = LeagueAdapter(dataLeague()) {
-            startActivity<DetailActivity>("data" to it)
-        }
-    }
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
 
-    private fun dataLeague(): List<League> {
-        val leagues: MutableList<League> = mutableListOf()
-        val ids = resources.getIntArray(R.array.ids)
-        val names = resources.getStringArray(R.array.name)
-        val descriptions = resources.getStringArray(R.array.description)
-        val images = resources.obtainTypedArray(R.array.image)
-        for (i in ids.indices) {
-            leagues.add(
-                League(ids[i], names[i], descriptions[i], images.getResourceId(i, 0))
+        Utils.setTheme(
+            this,
+            PreferenceManager.getDefaultSharedPreferences(this)
+                .getString(resources.getString(R.string.theme_key), "")
+        )
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        navController = navHostFragment.navController
+        NavigationUI.setupWithNavController(
+            binding.bottomNavigationView,
+            navController
+        )
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.eventFragment, R.id.leagueFragment
             )
-        }
-        images.recycle()
-        return leagues
-    }
-
-    inner class MainActivityUI : AnkoComponent<MainActivity> {
-        override fun createView(ui: AnkoContext<MainActivity>) = with(ui) {
-            constraintLayout {
-                lparams(width = matchParent, height = matchParent)
-                recyclerView = recyclerView {
-                    layoutManager = GridLayoutManager(context, 2)
-                }.lparams {
-                    width = matchParent
-                    height = matchParent
+        )
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            binding.apply {
+                when (destination.id) {
+                    R.id.leagueDetailFragment -> {
+                        appbarLayout.setExpanded(false, false)
+                        bottomAppBar.visibility = View.GONE
+                    }
+                    R.id.eventDetailsFragment -> {
+                        appbarLayout.setExpanded(false, false)
+                        bottomAppBar.visibility = View.GONE
+                    }
+                    R.id.leagueDetailDialogFragment -> {
+                        appbarLayout.setExpanded(false, false)
+                        bottomAppBar.visibility = View.GONE
+                    }
+                    R.id.leagueFragment -> {
+                        appbarLayout.setExpanded(true, true)
+                        bottomAppBar.visibility = View.VISIBLE
+                    }
+                    R.id.eventFragment -> {
+                        appbarLayout.setExpanded(true, true)
+                        bottomAppBar.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        appbarLayout.setExpanded(true, true)
+                        bottomAppBar.visibility = View.GONE
+                    }
                 }
             }
         }
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
+
+    override fun onSupportNavigateUp() =
+        navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+
+
 }

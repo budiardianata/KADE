@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_navigation"
+    app:startDestination="@id/leagueFragment">
+
+    <fragment
+        android:id="@+id/leagueFragment"
+        android:name="com.pdk.dicoding.kade.ui.fragments.LeagueFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_league">
+        <action
+            android:id="@+id/leagueToLeagueDetail"
+            app:destination="@id/leagueDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/leagueDetailFragment"
+        android:name="com.pdk.dicoding.kade.ui.fragments.LeagueDetailFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_league_detail">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <action
+            android:id="@+id/leagueDetailToEventDetails"
+            app:destination="@id/eventDetailsFragment" />
+        <argument
+            android:name="league"
+            app:argType="com.pdk.dicoding.kade.data.model.League" />
+        <action
+            android:id="@+id/leagueDetail_to_leagueDialog"
+            app:destination="@id/leagueDetailDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.pdk.dicoding.kade.ui.fragments.EventFragment"
+        android:label="@string/match"
+        tools:layout="@layout/fragment_event">
+        <action
+            android:id="@+id/eventToEventDetails"
+            app:destination="@id/eventDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="com.pdk.dicoding.kade.ui.fragments.EventDetailsFragment"
+        android:label="{title}"
+        tools:layout="@layout/fragment_event_details">
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="event"
+            app:argType="com.pdk.dicoding.kade.data.model.Event" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.pdk.dicoding.kade.ui.fragments.SettingsFragment"
+        android:label="@string/settings">
+        <action
+            android:id="@+id/settingsToAbout"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/leagueDetailDialogFragment"
+        android:name="com.pdk.dicoding.kade.ui.fragments.LeagueDetailDialogFragment"
+        android:label="fragment_league_detail_dialog"
+        tools:layout="@layout/fragment_league_detail_dialog">
+        <argument
+            android:name="league"
+            app:argType="com.pdk.dicoding.kade.data.model.League" />
+    </dialog>
+    <dialog
+        android:id="@+id/aboutFragment"
+        android:name="com.pdk.dicoding.kade.ui.fragments.AboutFragment"
+        android:label="@string/about" />
+
+</navigation>

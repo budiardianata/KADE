@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragments.EventDetailsFragment">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.pdk.dicoding.kade.data.model.Event" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:fitsSystemWindows="true"
+            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleGravity="top|center_horizontal"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:expandedTitleTextAppearance="@style/CustomTextExpandedToolbar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="?attr/actionBarSize"
+                    android:padding="@dimen/spacing_middle"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.5">
+
+                    <TextView
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.5"
+                        android:id="@+id/eventDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        app:date='@{data.eventDate??""}'
+                        app:time='@{data.eventTimeLocale ?? data.eventTime ?? ""}'
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@tools:sample/date/hhmmss" />
+
+                    <ImageView
+                        android:id="@+id/logoHome"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:contentDescription="@string/app_name"
+                        app:error="@{@drawable/ic_ball}"
+                        app:imageUrl="@{data.homeBadge}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/eventDate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/eventDate"
+                        tools:src="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/nameHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{data.homeTeam??"-"}'
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/eventDate"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/logoHome"
+                        tools:text="@tools:sample/first_names" />
+
+                    <ImageView
+                        android:id="@+id/logoAway"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:contentDescription="@string/app_name"
+                        app:error="@{@drawable/ic_ball}"
+                        app:imageUrl="@{data.awayBadge}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/eventDate"
+                        app:layout_constraintTop_toBottomOf="@+id/eventDate"
+                        tools:src="@tools:sample/avatars" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{data.awayTeam??"-"}'
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/eventDate"
+                        app:layout_constraintTop_toBottomOf="@+id/logoHome"
+                        tools:text="@tools:sample/last_names" />
+
+                    <TextView
+                        android:id="@+id/separator"
+                        app:layout_collapseMode="parallax"
+                        app:layout_collapseParallaxMultiplier="0.5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:text="@string/colon_separator"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/eventDate" />
+
+                    <TextView
+                        android:id="@+id/scoreHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/spacing_middle"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:text='@{data.homeScore??"-"}'
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/separator"
+                        app:layout_constraintTop_toBottomOf="@+id/eventDate" />
+
+                    <TextView
+                        android:id="@+id/scoreAway"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_middle"
+                        android:layout_marginBottom="@dimen/spacing_large"
+                        android:text='@{data.awayScore??"-"}'
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/separator"
+                        app:layout_constraintTop_toBottomOf="@+id/eventDate" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:id="@+id/main_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/spacing_middle"
+                android:layout_margin="2dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_small"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textStyle="bold"
+                        android:text="@string/player_details"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:background="@color/colorSecondary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:text_array='@{data.homeLineupGoalkeeper??"-"}'
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:gravity="start|center_vertical"
+                        tools:text="@tools:sample/full_names" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/goal_keeper"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:textAllCaps="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textSize="12sp"
+                        app:text_array='@{data.awayLineupGoalkeeper??"-"}'
+                        tools:text="@tools:sample/full_names" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:text_array='@{data.homeLineupDefense??"-"}'
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:gravity="start|center_vertical"
+                        tools:text="@tools:sample/full_names" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/defender"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:textAllCaps="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textSize="12sp"
+                        app:text_array='@{data.awayLineupDefense??"-"}'
+                        tools:text="@tools:sample/full_names" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:text_array='@{data.homeLineupMidfield??"-"}'
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:gravity="start|center_vertical"
+                        tools:text="@tools:sample/full_names" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/midfielder"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:textAllCaps="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textSize="12sp"
+                        app:text_array='@{data.awayLineupMidfield??"-"}'
+                        tools:text="@tools:sample/full_names" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:text_array='@{data.homeLineupForward??"-"}'
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:gravity="start|center_vertical"
+                        tools:text="@tools:sample/full_names" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/forwarder"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:textAllCaps="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textSize="12sp"
+                        app:text_array='@{data.awayLineupForward??"-"}'
+                        tools:text="@tools:sample/full_names" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:textStyle="bold"
+                        android:text="@string/match_details"
+                        android:padding="@dimen/spacing_small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:background="@color/colorSecondary" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:text_array='@{data.homeGoalDetails??"-"}'
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:gravity="start|center_vertical"
+                        tools:text="@tools:sample/full_names" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/goal_detail"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:textAllCaps="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textSize="12sp"
+                        app:text_array='@{data.awayGoalDetails??"-"}'
+                        tools:text="@tools:sample/full_names" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_middle"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        app:text_array='@{data.homeLineupSubstitutes??"-"}'
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:gravity="start|center_vertical"
+                        tools:text="@tools:sample/full_names" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/substitution"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:textAllCaps="true" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:textSize="12sp"
+                        app:text_array='@{data.awayLineupSubstitutes??"-"}'
+                        tools:text="@tools:sample/full_names" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

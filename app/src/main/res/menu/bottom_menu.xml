@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/leagueFragment"
+        android:icon="@drawable/ic_league"
+        android:title="@string/league" />
+
+    <item
+        android:id="@+id/eventFragment"
+        android:icon="@drawable/ic_match"
+        android:title="@string/match" />
+</menu>
