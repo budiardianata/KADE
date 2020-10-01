@@ -1,8 +1,8 @@
 package com.pdk.dicoding.kade.data.repository
 
 import androidx.lifecycle.liveData
-import com.pdk.bfaadicoding.submission.utils.Resource
 import com.pdk.dicoding.kade.data.api.ApiService
+import com.pdk.dicoding.kade.utils.Resource
 import com.pdk.dicoding.kade.utils.Utils
 import kotlinx.coroutines.Dispatchers
 

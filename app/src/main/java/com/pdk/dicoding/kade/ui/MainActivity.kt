@@ -9,8 +9,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.preference.PreferenceManager
 import com.pdk.dicoding.kade.R
 import com.pdk.dicoding.kade.databinding.ActivityMainBinding
+import com.pdk.dicoding.kade.utils.Utils
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -21,6 +23,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
+        Utils.setTheme(
+            this,
+            PreferenceManager.getDefaultSharedPreferences(this)
+                .getString(resources.getString(R.string.theme_key), "")
+        )
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHostFragment.navController
@@ -28,6 +37,7 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView,
             navController
         )
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.eventFragment, R.id.leagueFragment

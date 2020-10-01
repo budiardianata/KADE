@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.elevation.ElevationOverlayProvider
 import com.pdk.dicoding.kade.databinding.FragmentEventDetailsBinding
 import com.pdk.dicoding.kade.ui.viewmodels.EventDetailViewModel
 import com.pdk.dicoding.kade.utils.Utils
@@ -42,7 +42,7 @@ class EventDetailsFragment : Fragment() {
         initToolbar()
         binding.coordinator.transitionName = args.event.id
         binding.mainLayout.visibility = View.GONE
-        viewModel.listBadge.observe(viewLifecycleOwner, Observer { badge ->
+        viewModel.listBadge.observe(viewLifecycleOwner, { badge ->
             args.event.homeBadge = badge[0]
             args.event.awayBadge = badge[1]
             binding.apply {
@@ -51,6 +51,7 @@ class EventDetailsFragment : Fragment() {
                 progress.visibility = View.GONE
             }
         })
+
     }
 
     private fun initToolbar() {
@@ -59,5 +60,19 @@ class EventDetailsFragment : Fragment() {
             findNavController(),
             AppBarConfiguration(findNavController().graph)
         )
+
+        if (Utils.isDarkTheme(requireContext())) {
+            binding.collapsingToolbar.apply {
+                setContentScrimColor(
+                    ElevationOverlayProvider(requireContext())
+                        .compositeOverlayWithThemeSurfaceColorIfNeeded(4f)
+                )
+                setBackgroundColor(
+                    ElevationOverlayProvider(requireContext()).compositeOverlayWithThemeSurfaceColorIfNeeded(
+                        4f
+                    )
+                )
+            }
+        }
     }
 }

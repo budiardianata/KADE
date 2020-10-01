@@ -28,10 +28,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:contentScrim="?attr/colorPrimarySurface"
+                app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleGravity="top|center_horizontal"
-                app:expandedTitleTextAppearance="@style/CustomExpandedToolbar"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:expandedTitleTextAppearance="@style/CustomTextExpandedToolbar">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -74,7 +74,8 @@
                         android:id="@+id/nameHome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{data.homeTeam}"
+                        android:text='@{data.homeTeam??"-"}'
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/eventDate"
                         app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text='@{data.awayTeam??"-"}'
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/eventDate"
@@ -189,7 +191,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:layout_marginBottom="@dimen/spacing_small"
-                        android:background="@color/colorPrimaryDark" />
+                        android:background="@color/colorSecondary" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -370,7 +372,7 @@
                         android:layout_height="1dp"
                         android:layout_marginTop="@dimen/spacing_small"
                         android:layout_marginBottom="@dimen/spacing_small"
-                        android:background="@color/colorPrimaryDark" />
+                        android:background="@color/colorSecondary" />
                 </LinearLayout>
 
                 <LinearLayout

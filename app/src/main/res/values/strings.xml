@@ -2,7 +2,9 @@
     <string name="app_name" translatable="false">Football App</string>
     <string name="colon_separator" translatable="false">⦂</string>
     <string name="theme_key" translatable="false">themePref</string>
-
+    <string name="author_name" translatable="false">Budi Ardianata</string>
+    <string name="author_email" translatable="false">budiardianata@gmail.com</string>
+    <string name="source_code" translatable="false">Source Code</string>
     <string name="not_found">Data Not Found</string>
     <string name="not_valid">%s is not valid Country</string>
     <string name="settings">Settings</string>

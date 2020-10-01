@@ -29,8 +29,8 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 app:expandedTitleGravity="bottom|center_horizontal"
-                app:expandedTitleTextAppearance="@style/CustomExpandedToolbar"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+                app:expandedTitleTextAppearance="@style/CustomTextExpandedToolbar">
 
                 <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/leagueLogo"

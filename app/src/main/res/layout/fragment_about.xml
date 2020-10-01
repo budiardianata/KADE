@@ -54,14 +54,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:maxLines="1"
-        android:text="Budi Ardianata"
+        android:text="@string/author_name"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toBottomOf="@+id/separator" />
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
         android:drawableStart="@drawable/ic_user"
         android:drawablePadding="@dimen/spacing_medium"
         android:lines="1"
-        android:text="budiardianata@windowslive.com"
+        android:text="@string/author_email"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,8 +82,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Source Code"
-        app:backgroundTint="@color/colorAccent"
+        android:text="@string/source_code"
+        app:backgroundTint="@color/colorSecondary"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toBottomOf="@+id/email" />
 </androidx.constraintlayout.widget.ConstraintLayout>

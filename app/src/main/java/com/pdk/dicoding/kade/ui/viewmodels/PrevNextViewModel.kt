@@ -5,10 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.pdk.bfaadicoding.submission.utils.Resource
 import com.pdk.dicoding.kade.data.model.Event
 import com.pdk.dicoding.kade.data.repository.EventRepository
 import com.pdk.dicoding.kade.utils.EventType
+import com.pdk.dicoding.kade.utils.Resource
 
 
 /**

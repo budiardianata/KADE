@@ -43,32 +43,11 @@ class LeagueDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initToolbar()
         binding.appbar.background
         binding.coordinator.transitionName = args.league.id
+        initToolbar()
         binding.data = args.league
-        Glide.with(requireContext())
-            .asBitmap()
-            .load(args.league.badge)
-            .into(object : CustomTarget<Bitmap>() {
-                override fun onResourceReady(
-                    resource: Bitmap,
-                    transition: Transition<in Bitmap>?
-                ) {
-                    val palette = Palette.from(resource).generate()
-                    palette.darkVibrantSwatch?.let {
-                        binding.collapsingToolbar.setBackgroundColor(it.rgb)
-                        binding.toolbar.setBackgroundColor(it.rgb)
-                        binding.collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE)
-                        binding.collapsingToolbar.setExpandedTitleColor(Color.WHITE)
-                    } ?: palette.lightVibrantSwatch?.let {
-                        binding.toolbar.setBackgroundColor(it.rgb)
-                        binding.collapsingToolbar.setBackgroundColor(it.rgb)
-                    }
-                }
 
-                override fun onLoadCleared(placeholder: Drawable?) {}
-            })
 
         initTab()
 
@@ -88,6 +67,28 @@ class LeagueDetailFragment : Fragment() {
             findNavController(),
             AppBarConfiguration(findNavController().graph)
         )
+        Glide.with(requireContext())
+            .asBitmap()
+            .load(args.league.badge)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    val palette = Palette.from(resource).generate()
+                    palette.darkVibrantSwatch?.let {
+                        binding.collapsingToolbar.setBackgroundColor(it.rgb)
+                        binding.collapsingToolbar.setContentScrimColor(it.rgb)
+                        binding.collapsingToolbar.setCollapsedTitleTextColor(Color.WHITE)
+                        binding.collapsingToolbar.setExpandedTitleColor(Color.WHITE)
+                    } ?: palette.lightVibrantSwatch?.let {
+                        binding.collapsingToolbar.setContentScrimColor(it.rgb)
+                        binding.collapsingToolbar.setBackgroundColor(it.rgb)
+                    }
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {}
+            })
     }
 
     private fun initTab() {

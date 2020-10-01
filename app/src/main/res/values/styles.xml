@@ -3,12 +3,15 @@
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
     </style>
 
-    <style name="CustomExpandedToolbar" parent="android:TextAppearance">
-        <item name="android:textColor">@android:color/white</item>
+    <style name="CustomTextExpandedToolbar" parent="android:TextAppearance">
         <item name="android:textSize">20sp</item>
     </style>
 </resources>

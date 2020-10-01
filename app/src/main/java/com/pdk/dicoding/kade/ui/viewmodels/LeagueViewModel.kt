@@ -2,10 +2,10 @@ package com.pdk.dicoding.kade.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.pdk.bfaadicoding.submission.utils.Resource
 import com.pdk.dicoding.kade.data.api.ApiService
 import com.pdk.dicoding.kade.data.model.League
 import com.pdk.dicoding.kade.data.repository.LeagueRepository
+import com.pdk.dicoding.kade.utils.Resource
 import com.pdk.dicoding.kade.utils.Utils
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch

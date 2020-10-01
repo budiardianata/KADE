@@ -13,18 +13,17 @@ import androidx.core.view.isEmpty
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.pdk.bfaadicoding.submission.utils.Status
 import com.pdk.dicoding.kade.R
 import com.pdk.dicoding.kade.databinding.FragmentLeagueBinding
 import com.pdk.dicoding.kade.ui.adapters.LeagueAdapter
 import com.pdk.dicoding.kade.ui.viewmodels.LeagueViewModel
+import com.pdk.dicoding.kade.utils.Status
 import com.pdk.dicoding.kade.utils.Utils
 
 
@@ -49,7 +48,7 @@ class LeagueFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
-        viewModel.listCountry.observe(viewLifecycleOwner, Observer {
+        viewModel.listCountry.observe(viewLifecycleOwner, {
             country = it
         })
         initSearchCountry()
@@ -148,7 +147,7 @@ class LeagueFragment : Fragment() {
     }
 
     private fun observeLeagueData() {
-        viewModel.listLeague.observe(viewLifecycleOwner, Observer {
+        viewModel.listLeague.observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -204,7 +203,7 @@ class LeagueFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.country.observe(this, Observer {
+        viewModel.country.observe(this, {
             binding.countrySearch.setQuery(if (it == Utils.DEFAULT_COUNTRY) "" else it, false)
         })
     }

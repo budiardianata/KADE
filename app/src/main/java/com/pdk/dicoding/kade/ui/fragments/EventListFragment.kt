@@ -5,17 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pdk.bfaadicoding.submission.utils.Status
 import com.pdk.dicoding.kade.R
 import com.pdk.dicoding.kade.databinding.FragmentEventListBinding
 import com.pdk.dicoding.kade.ui.adapters.EventsAdapter
 import com.pdk.dicoding.kade.ui.viewmodels.PrevNextViewModel
 import com.pdk.dicoding.kade.utils.EventType
+import com.pdk.dicoding.kade.utils.Status
 
 
 private const val TYPE = "type"
@@ -81,7 +80,7 @@ class EventListFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.dataEvent.observe(viewLifecycleOwner, Observer {
+        viewModel.dataEvent.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (!it.data.isNullOrEmpty()) {

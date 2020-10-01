@@ -22,14 +22,8 @@ class Event(
     val eventTime: String,
     @SerializedName("strTimeLocal")
     val eventTimeLocale: String?,
-
-    @SerializedName("idLeague")
-    val leagueId: String,
-    @SerializedName("strLeague")
-    val leagueName: String,
     @SerializedName("strSport")
     val leagueType: String,
-
     @SerializedName("idHomeTeam")
     val idHome: String,
     @SerializedName("strHomeTeam")
@@ -38,8 +32,6 @@ class Event(
     var homeBadge: String?,
     @SerializedName("intHomeScore")
     val homeScore: String?,
-    @SerializedName("strHomeFormation")
-    val homeFormation: String?,
     @SerializedName("strHomeGoalDetails")
     val homeGoalDetails: String?,
     @SerializedName("strHomeLineupDefense")
@@ -52,7 +44,6 @@ class Event(
     val homeLineupMidfield: String?,
     @SerializedName("strHomeLineupSubstitutes")
     val homeLineupSubstitutes: String?,
-
     @SerializedName("idAwayTeam")
     val awayId: String,
     @SerializedName("strAwayTeam")
@@ -61,8 +52,6 @@ class Event(
     var awayBadge: String?,
     @SerializedName("intAwayScore")
     val awayScore: String?,
-    @SerializedName("strAwayFormation")
-    val awayFormation: String?,
     @SerializedName("strAwayGoalDetails")
     val awayGoalDetails: String?,
     @SerializedName("strAwayLineupDefense")

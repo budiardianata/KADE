@@ -8,8 +8,6 @@
         android:topLeftRadius="10dp"
         android:topRightRadius="10dp" />
 
-    <solid
-        android:tint="?attr/colorControlNormal"
-        android:color="?attr/colorOnPrimarySurface" />
+    <solid android:color="@color/colorSecondary" />
 
 </shape>

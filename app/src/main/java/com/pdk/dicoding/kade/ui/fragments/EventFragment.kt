@@ -6,16 +6,15 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.pdk.bfaadicoding.submission.utils.Status
 import com.pdk.dicoding.kade.R
 import com.pdk.dicoding.kade.databinding.FragmentEventBinding
 import com.pdk.dicoding.kade.ui.adapters.EventsAdapter
 import com.pdk.dicoding.kade.ui.viewmodels.EventViewModel
+import com.pdk.dicoding.kade.utils.Status
 
 
 class EventFragment : Fragment() {
@@ -48,8 +47,7 @@ class EventFragment : Fragment() {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = eventsAdapter
         }
-
-        viewModel.searchResult.observe(viewLifecycleOwner, Observer {
+        viewModel.searchResult.observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
                     if (!it.data.isNullOrEmpty()) {
@@ -118,7 +116,7 @@ class EventFragment : Fragment() {
                 }
             })
         }
-        viewModel.query.observe(viewLifecycleOwner, Observer {
+        viewModel.query.observe(viewLifecycleOwner, {
             searchView.setQuery(it, false)
             searchView.clearFocus()
         })

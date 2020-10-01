@@ -1,13 +1,12 @@
 package com.pdk.dicoding.kade.ui.fragments
 
-import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.pdk.dicoding.kade.R
+import com.pdk.dicoding.kade.utils.Utils
 
 class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener,
     Preference.OnPreferenceClickListener {
@@ -25,7 +24,7 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
 
     override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
         when (preference) {
-            themePreference -> setTheme(newValue as String)
+            themePreference -> Utils.setTheme(requireContext(), newValue as String)
         }
         return true
     }
@@ -37,23 +36,5 @@ class SettingsFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChan
             }
         }
         return true
-    }
-
-    private fun setTheme(mode: String) {
-        when (mode) {
-            resources.getStringArray(R.array.themeEntryArray)[0] -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            resources.getStringArray(R.array.themeEntryArray)[1] -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            else -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
-                }
-            }
-        }
     }
 }

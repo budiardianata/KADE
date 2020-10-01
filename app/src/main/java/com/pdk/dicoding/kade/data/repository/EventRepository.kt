@@ -2,8 +2,8 @@ package com.pdk.dicoding.kade.data.repository
 
 import android.app.Application
 import androidx.lifecycle.liveData
-import com.pdk.bfaadicoding.submission.utils.Resource
 import com.pdk.dicoding.kade.data.api.ApiService
+import com.pdk.dicoding.kade.utils.Resource
 import kotlinx.coroutines.Dispatchers
 
 
@@ -21,7 +21,6 @@ class EventRepository(application: Application) {
         emit(Resource.loading(data = null))
         try {
             val leaguesResponse = apiService.footballApi.searchEvent(query)
-
             emit(Resource.success(data = leaguesResponse.events!!.filter { it.leagueType == strSoccer }))
         } catch (exception: Exception) {
             emit(Resource.error(data = null, message = exception.message ?: ""))

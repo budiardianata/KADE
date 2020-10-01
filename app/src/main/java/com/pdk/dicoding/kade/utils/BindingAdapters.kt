@@ -1,4 +1,4 @@
-package com.pdk.dicoding.kade.ui
+package com.pdk.dicoding.kade.utils
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
